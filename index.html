@@ -1,0 +1,20 @@
+<html>
+<head></head>
+<body>
+    <input type="button" value="リクエスト" onclick="exec();" />
+    <textarea id="area"></textarea>
+
+    <script>
+        async function exec() {
+            // APIサイトのURL
+            var url = 'https://dog.ceo/api/breeds/image/random';
+
+            // リクエスト
+            var res = await (await fetch(url)).json();
+
+            // 結果をテキストエリアに表示
+            document.querySelector('#area').value = JSON.stringify(res);
+        }
+    </script>
+</body>
+</html>
