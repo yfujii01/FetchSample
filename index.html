@@ -1,20 +1,33 @@
 <html>
+
 <head></head>
+
 <body>
-    <input type="button" value="リクエスト" onclick="exec();" />
-    <textarea id="area"></textarea>
+    <div>宛先</div>
+    <div><input id="url" type="text" value="https://dog.ceo/api/breeds/image/random" / size="50"></div>
+    <br>
+    <div><input type="button" value="リクエスト" onclick="exec();" /></div>
+    <div>結果</div>
+    <div><textarea id="area" rows="10" cols="50"></textarea></div>
 
     <script>
         async function exec() {
             // APIサイトのURL
-            var url = 'https://dog.ceo/api/breeds/image/random';
+            var url = document.querySelector('#url').value;
 
             // リクエスト
-            var res = await (await fetch(url)).json();
+            try {
+                var res = await fetch(url);
+                var text = await res.text();
 
-            // 結果をテキストエリアに表示
-            document.querySelector('#area').value = JSON.stringify(res);
+                // 結果をテキストエリアに表示(正常)
+                document.querySelector('#area').value = text;
+            } catch (err) {
+                // 結果をテキストエリアに表示(失敗)
+                document.querySelector('#area').value = err;
+            }
         }
     </script>
 </body>
+
 </html>
